@@ -3,7 +3,7 @@ version: 2.0
 jobs:
   cogserver:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -21,13 +21,13 @@ jobs:
       - run:
           name: Install CogUtil
           command: |
-            git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/cogutil /ws/cogutil
+            git clone --depth 1 https://github.com/opencog/cogutil /ws/cogutil
             mkdir -p /ws/cogutil/build
             cd /ws/cogutil/build && cmake .. && make -j2 && make -j2 install
             ldconfig
       - run:
           name: Checkout AtomSpace
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/atomspace /ws/atomspace
+          command: git clone --depth 1 https://github.com/opencog/atomspace /ws/atomspace
       - run:
           name: Install AtomSpace
           command: |
@@ -36,7 +36,7 @@ jobs:
             ldconfig
       - run:
           name: Checkout RocksStorageNode
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/atomspace-rocks /ws/atomspace-rocks
+          command: git clone --depth 1 https://github.com/opencog/atomspace-rocks /ws/atomspace-rocks
       - run:
           name: Install RocksStorageNode
           command: |
@@ -74,7 +74,7 @@ jobs:
 
   package: #Place holder
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
     working_directory: /ws/cogserver
     steps:
